@@ -47,14 +47,16 @@
 		\subsubsection{Anti-Aliasingfilter}
 		\begin{quote}
 		      Beim Abtasten eines Signals entsteht ein periodisches Spektum.Der Anti-Aliasingfilter hat die Aufgabe alle
-		      Frequenzen die größer sind als die halbe Abtastfrequenz zu unterdrücken. Hierzu werden alle zu hohen Frequenzen von ihrer Amplitude auf einen Wert unterhalb des
-              \"least significant bits\" gedämpft.
+		      Frequenzen die größer als die halbe Abtastfrequenz sind zu unterdrücken. 
 		      
 		      \begin{equation*}
                 	\begin{split}
                 		\omega > \frac{\omega_0}{2} \hspace{2em} \text{mit} \hspace{2em} \omega_0 = \frac{2\pi}{T}
                 	\end{split}
                 \end{equation*}
+		      
+		      Hierzu werden alle zu hohen Frequenzen von ihrer Amplitude auf einen Wert unterhalb des
+              \" least significant bits \" gedämpft.\\
 		      
 		      Würden diese Frequenzen nicht gefiltert werden würde es zu dem sogenannten Aliasing kommen bei dem höhere
 		      Frequenzanteile fälschlicherweise als kleinere Frequenzen interpretiert werden. Als folge würde das
@@ -72,8 +74,47 @@
         \end{quote}
         \subsubsection{ADU}
 		\begin{quote}
-			Der Analog-Digital-Umsetzer ermittelt aus dem abgetasteten analogen Signal das dazupassende Digitale Signal.
+			Der Analog-Digital-Umsetzer ermittelt aus dem abgetasteten analogen Signal das dazupassende Digitale Signal.\\
+			\TODO{minimale Abtastfrequenz}
+			\TODO{einzelne Glieder}
 		\end{quote}
+    \end{quote}
+    \subsection{Berechnung der Abtastfrequenz bei einem Butterworth-Tiefpass 2.Ordnung}
+    \begin{quote}
+        Gegeben ist ein Tiefpass 2.Ordnung mit einer $3dB$-Grenzfrequenz von $f_g=3,1kHz$. Wir wählen einen
+        Butterworthtiefpass und erstellen den Frequenzgang.\\
+        Die Übertragungsfunktion eines Tiefpasses 2. Ordnung lautet:
+        
+        \begin{equation*}
+        	\begin{split}
+        		H(j\omega) = \frac{1}{1 + \frac{\sqrt{2}}{f_g 2 \pi}j\omega + \frac{1}{(f_g 2 \pi)^2}(j\omega)^2}
+        	\end{split}
+        \end{equation*}
+        
+        Daraus ergibt sich folgender Frequenzgang:
+        
+        \begin{figure}[H]
+			\centering
+				\includegraphics[scale=1]{Frequenzgang}
+				   \caption{Frequenzgang Butterworthtiefpass 2. Ordnung}
+		\end{figure}
+		\vspace{1em}
+	 	
+	   Als nächstes berechnen wir die benötigte Dämpfung, die das Aliasing verhindert. Dazu dämpfen wir die maximal
+	   mögliche Amplitude auf einen kleineren Wert als $U_{LSB}$. In unserem Fall ist der Spannungsbereich von $-7V$-$+7V$
+	   bei einem $10Bit$ ADU. Daraus ergibt sich folgendes \"least significant bit\"
+	   
+	   \begin{equation*}
+        	\begin{split}
+        		U_{LSB} = \frac{(7V-(-7V))}{2^(10-1)} = \frac{7}{256}
+        	\end{split}
+        \end{equation*}
+        
+        Daraus ergibt sich, dass eine maximale Amplitude von $+7V$ um einen Wert von $256$ bzw. $10 Log(256) = 24 dB$
+        gedämpft werden muss. \\
+        An dem Frequenzgang sehen wir, dass alle Frequenzen die größer sind als $31kHz$ um mehr als $24 dB$ gedämpft
+        werden. Aus diesem Wissen ergibt sich, dass die Abtastfrequenz $f_0 = 15,5Khz$ betragen soll.
+        
     \end{quote}
 \end{quote}
 
