@@ -17,6 +17,11 @@
 
 \section{Vorbereitungsaufgaben}
 \begin{quote}
+    \subsection{Stellen Sie Ihre Implementierung des Interruptgesteuerten ADUs fertig.}
+    \begin{quote}
+        siehe Protokoll vom Termin 1
+    \end{quote}
+    
 	\subsection{Aufbau digitale Messkette}
     \begin{quote}
         Eine Digitale Messkette dient dem Zweck ein analoges Signal mit Hilfe eines Sensors zu erfassen und in ein
@@ -70,7 +75,7 @@
 		      benötigt um ein Signal umzuwandeln. Es ergibt keinen Sinn ein Signal Häufiger abzutasten als der ADU umwandeln
 		      kann.
 		\end{quote}
-		\subsection{Abtast-Halte-Glied}
+		\subsubsection{Abtast-Halte-Glied}
         \begin{quote}
             Ein Abtast-Halte-Glied hat die Aufgabe einen Wert abzutasten und für die zeit zu halten die der ADU
             benötigt um aus dem Abgetasteten analogen Wert ein digitalen Wert zu konvertieren.
@@ -112,15 +117,40 @@
 	   
 	   \begin{equation*}
         	\begin{split}
-        		U_{LSB} = \frac{(7V-(-7V))}{2^10-1)} = \frac{14}{1023}
+        		U_{LSB} = \frac{(7V-(-7V))}{2^{10}-1} = \frac{14}{1023}
         	\end{split}
         \end{equation*}
         
-        Daraus ergibt sich, dass eine maximale Amplitude von $+7V$ um einen Wert von $\frac{1023}{2}$ bzw. $10
-        Log(\frac{1023}{2}) = 27 dB$ gedämpft werden muss. \\
-        An dem Frequenzgang sehen wir, dass alle Frequenzen die größer sind als $20kHz$ um mehr als $30 dB$ gedämpft
-        werden. Aus diesem Wissen ergibt sich, dass die Abtastfrequenz $f_0 = 10Khz$ betragen soll.
+        Daraus ergibt sich, dass eine maximale Amplitude von $+7V$ um einen Wert von $\frac{2}{1023}$ bzw. $10
+        Log(\frac{2}{1023}) = -27 dB$ gedämpft werden muss. \\
+        An dem Frequenzgang sehen wir, dass alle Frequenzen die größer sind als $20kHz$ um mehr als $-30 dB$ gedämpft
+        werden. Aus diesem Wissen ergibt sich, dass die Abtastfrequenz $f_0 = 40kHz$ betragen soll.
         
+    \end{quote}
+    
+    \subsection{Berechnung der Abtastfrequenz bei einem Butterworth-Tiefpass 8.Ordnung}
+    \begin{quote}
+        Die neue Übertagungsfunktion $H_2$ des Tiefpasses 8. Ordnung
+        
+        \begin{equation*}
+        	\begin{split}
+        		H_2(j\omega) = H^4 (j\omega)
+        	\end{split}
+        \end{equation*}
+        
+        Daraus ergibt sich nun der folgende Frequenzgang:
+        
+        \begin{figure}[H]
+			\centering
+				\includegraphics[scale=0.5]{Frequenzgang8Ordnung}
+				   \caption{Frequenzgang Butterworthtiefpass 8 Ordnung}
+		\end{figure}
+		\vspace{1em}
+	 	
+	 	Da sich die Bedingung der Dämpfung nicht geändert hat kontrollieren wir ab welcher Frequenz bei diesem aktuellen
+	 	Frequenzgang eine Dämpfung von mindestens $-27 dB$ erreicht wird.\\
+	 	Bei Frequenzen größer als $5kHz$ ist die Dämpfung größer als $-36 dB$. Daraus ergibt sich eine neue Abtastfrequenz
+	 	von $f_0 = 10kHz$.
     \end{quote}
 \end{quote}
 
