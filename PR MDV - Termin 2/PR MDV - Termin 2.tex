@@ -66,6 +66,9 @@
 		      Sinne eine möglichst hohe Abstastfrequenz erstrebenswert. Eine höhe Abstastfrequenz hat jedoch zur folge, dass
 		      ein steilerer Anti-Aliasingfilter notwendig ist um das Aliasing zu verhindern. Außerdem ist die
 		      Schaltungstechnische Umsetzung bald sehr herausfordernd.\\
+		      Des weiteren begrenzt der Analog-Digital-Umsetzer die minimale Abtastfrequenz, da der ADU eine gewisse Zeit
+		      benötigt um ein Signal umzuwandeln. Es ergibt keinen Sinn ein Signal Häufiger abzutasten als der ADU umwandeln
+		      kann.
 		\end{quote}
 		\subsection{Abtast-Halte-Glied}
         \begin{quote}
@@ -75,10 +78,13 @@
         \subsubsection{ADU}
 		\begin{quote}
 			Der Analog-Digital-Umsetzer ermittelt aus dem abgetasteten analogen Signal das dazupassende Digitale Signal.\\
-			\TODO{minimale Abtastfrequenz}
-			\TODO{einzelne Glieder}
 		\end{quote}
+		
+		In dem praktischen Aufbau werden der Sensor sowie die Signalkonditionierung durch die Spannungsquelle realisiert.
+		Die externe Wandler-Box übrnimmt die Aufgabe des Anti-Aliasingfilters. Auf dem Micro-Controller selbst ist das
+		Abstast-Halte-Glied sowie der Analog-Digital-Umwandler integriert.
     \end{quote}
+    
     \subsection{Berechnung der Abtastfrequenz bei einem Butterworth-Tiefpass 2.Ordnung}
     \begin{quote}
         Gegeben ist ein Tiefpass 2.Ordnung mit einer $3dB$-Grenzfrequenz von $f_g=3,1kHz$. Wir wählen einen
@@ -106,14 +112,14 @@
 	   
 	   \begin{equation*}
         	\begin{split}
-        		U_{LSB} = \frac{(7V-(-7V))}{2^(10-1)} = \frac{7}{256}
+        		U_{LSB} = \frac{(7V-(-7V))}{2^10-1)} = \frac{14}{1023}
         	\end{split}
         \end{equation*}
         
-        Daraus ergibt sich, dass eine maximale Amplitude von $+7V$ um einen Wert von $256$ bzw. $10 Log(256) = 24 dB$
-        gedämpft werden muss. \\
-        An dem Frequenzgang sehen wir, dass alle Frequenzen die größer sind als $31kHz$ um mehr als $24 dB$ gedämpft
-        werden. Aus diesem Wissen ergibt sich, dass die Abtastfrequenz $f_0 = 15,5Khz$ betragen soll.
+        Daraus ergibt sich, dass eine maximale Amplitude von $+7V$ um einen Wert von $\frac{1023}{2}$ bzw. $10
+        Log(\frac{1023}{2}) = 27 dB$ gedämpft werden muss. \\
+        An dem Frequenzgang sehen wir, dass alle Frequenzen die größer sind als $20kHz$ um mehr als $30 dB$ gedämpft
+        werden. Aus diesem Wissen ergibt sich, dass die Abtastfrequenz $f_0 = 10Khz$ betragen soll.
         
     \end{quote}
 \end{quote}
