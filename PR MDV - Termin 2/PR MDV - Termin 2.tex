@@ -158,7 +158,11 @@
     	Um ein $2kHz$ Signal abzutasten, würde eine Abtastfrequenz von wenigstens $4 kHz$ ausreichen. Allerdings würde
     	hierbei Aliasing auftreten, da der Tiegpassfilter erst ab einer Frequenz von $8 kHz$ die Amplituden auf unter
     	$U_{LSB}$ dämpft.\\
-    	Aus diesem Grund benutzen wir die in der vorigen Aufgabe ausgerechnete Abtastfrequenz von $10kHz$.
+    	Jedoch wäre für Frequenzen größer als $2kHz$ aliasing Vertretbar, da wir sowieso nicht versuchen größere Frequenzen
+    	abzutasten. Wie oben beschrieben hat der Anti-Aliasingfilter eine Bandbreite von $8kHz$. Wenn wir nun die
+    	Abtastfrequenz auf $6kHz$ legen werden alle Frequenzen unterhalb von $2kHz$ fehlerfrei durchgelassen, bei den
+    	Frequenzen zwischen $2kHz$ und $8kHz$ wird es zu Aliasing kommen und alle Frequenzen größer als $8kHz$ werden auf
+    	einen Wert unterhalb von der Amplitude $U_{LSB}$ gedämpft.\\
     \end{quote}
 \end{quote}
 
